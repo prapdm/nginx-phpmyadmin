@@ -6,12 +6,12 @@ RUN \
 apk update && apk upgrade && apk --update add --no-cache  --virtual .build-dependencies wget
 
 ENV PHPMYADMIN_VERSION=4.6.6
-ENV restart_nginx=0
+ENV restart=0
 
 RUN \
 #reload nginx by ENV
 (crontab -l 2>/dev/null; echo "*/1 * * * * /root/nginx.sh") | crontab - && \
-echo -e "#!/bin/sh \n if [ ${restart} = 1 ]; then \n nginx -s reload \n  echo \"Nginx reloaded\" \n export restart_nginx=0 \n   fi" > /root/nginx.sh && \
+echo -e "#!/bin/sh \n if [ \$restart = 1 ]; then \n nginx -s reload \n  echo \"Nginx reloaded\" \n export restart=0 \n   fi" > /root/nginx.sh && \
 chmod +x /root/nginx.sh && \
 #Install phpmyadmin
 wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz && \
