@@ -2,6 +2,9 @@
 
 NGINX_CONFIG="/etc/nginx/conf.d/"
 
+#start nginx
+nginx
+
 while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG; do
   nginx -t
   if [ $? -eq 0 ]
