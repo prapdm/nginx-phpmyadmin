@@ -1,0 +1,12 @@
+#!/bin/sh
+
+NGINX_CONFIG="/etc/nginx/conf.d/"
+
+while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG; do
+  nginx -t
+  if [ $? -eq 0 ]
+        then
+          echo "Reloading Nginx Configuration"
+          ngnix -s reload
+  fi
+done
