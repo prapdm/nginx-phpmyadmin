@@ -28,10 +28,9 @@ rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin
 #sed -i "s@define('CONFIG_DIR'.*@define('CONFIG_DIR', '/etc/phpmyadmin/');@" /usr/phpmyadmin/libraries/vendor_config.php
 
 
-#add autoreload when config change
+#automatic reloading when config changed
+COPY nginx.sh /root/nginx.sh
+RUN chmod +x /root/nginx.sh
 
-COPY reload.sh /root/reload.sh
-RUN chmod +x /root/reload.sh
 
-
-CMD ["/root/reload.sh"]
+CMD ["/root/nginx.sh"]
