@@ -38,6 +38,6 @@ chmod 644 /usr/share/webapps/phpmyadmin/config.inc.php
 COPY nginx.sh /root/nginx.sh
 RUN chmod +x /root/nginx.sh 
 
+VOLUME ["/usr/share/webapps/"]
 
-
-CMD ["/root/nginx.sh"]
+CMD ["/ROOT/NGINX.SH"]
