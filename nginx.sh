@@ -11,5 +11,10 @@ while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG; do
         then
           echo "Reloading Nginx Configuration"
           nginx -s reload
+          if [ $? != 0 ]
+                then
+                nginx
+                fi
   fi
 done
+

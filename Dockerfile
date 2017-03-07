@@ -31,7 +31,8 @@ sed -i "s@define('CONFIG_DIR'.*@define('CONFIG_DIR', '/etc/phpmyadmin/');@" /usr
 
 #automatic reloading when config changed
 COPY nginx.sh /root/nginx.sh
-RUN chmod +x /root/nginx.sh
+RUN chmod +x /root/nginx.sh 
+
 
 
 CMD ["/root/nginx.sh"]
