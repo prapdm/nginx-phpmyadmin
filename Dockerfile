@@ -11,8 +11,9 @@ RUN \
 #Install phpmyadmin
 wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz && \
 tar zxvf phpmyadmin.tar.gz && \
-mkdir -p /usr/share/webapps/phpmyadmin && \
-mv phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /usr/share/webapps/phpmyadmin && \
+mkdir /usr/share/webapps && \
+mv /phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /phpmyadmin && \
+mv /phpmyadmin /usr/share/webapps && \
 rm phpmyadmin.tar.gz -r && \
 addgroup -g 82 -S www-data && \
 adduser -u 82 -S -D -G www-data  -s /sbin/nologin www-data && \
@@ -24,8 +25,8 @@ rm -rf /tmp/* && \
 rm -rf /src  && \
 rm -rf /usr/share/webapps/phpmyadmin/js/jquery/src/ /usr/share/webapps/phpmyadmin/js/openlayers/src/ /usr/share/webapps/phpmyadmin/setup/ /usr/share/webapps/phpmyadmin/examples/ /usr/share/webapps/phpmyadmin/test/ &&\
 rm -rf /usr/share/webapps/phpmyadmin/po/ /usr/share/webapps/phpmyadmin/templates/test/ /usr/share/webapps/phpmyadmin/phpunit.xml.* /usr/share/webapps/phpmyadmin/build.xml  &&\
-rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin/RELEASE-DATE-$PHPMYADMIN_VERSION  
-#sed -i "s@define('CONFIG_DIR'.*@define('CONFIG_DIR', '/etc/phpmyadmin/');@" /usr/phpmyadmin/libraries/vendor_config.php
+rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin/RELEASE-DATE-$PHPMYADMIN_VERSION && \ 
+sed -i "s@define('CONFIG_DIR'.*@define('CONFIG_DIR', '/etc/phpmyadmin/');@" /usr/share/webapps/phpmyadmin/libraries/vendor_config.php
 
 
 #automatic reloading when config changed
