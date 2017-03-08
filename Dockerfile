@@ -6,7 +6,7 @@ RUN \
 apk update && apk upgrade && apk --no-cache add inotify-tools  &&  apk --update add --no-cache  --virtual .build-dependencies wget
 
 ENV PHPMYADMIN_VERSION=4.6.6
-ENV MYSQL_ROOT_PASSWORD=my-secret-pw22
+
 
 RUN \
 #Install phpmyadmin

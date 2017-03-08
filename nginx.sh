@@ -30,8 +30,7 @@ echo "\$cfg['Servers'][\$i]['AllowRoot'] = true;" >>/usr/share/webapps/phpmyadmi
 echo "\$cfg['UploadDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['SaveDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
 find /usr/share/ -type d -exec chmod 755 {} \;
-find /usr/share/webapps/ -type f -exec chmod 640 {} \;
-chmod 644 /usr/share/webapps/phpmyadmin/config.inc.php
+find /usr/share/webapps/phpmyadmin -type f -exec chmod 644 {} \;
 fi
 
 #reload nginx when config changed
