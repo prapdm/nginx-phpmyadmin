@@ -20,7 +20,10 @@ rm -rf /usr/share/webapps/phpmyadmin/po/ /usr/share/webapps/phpmyadmin/templates
 rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin/RELEASE-DATE-$PHPMYADMIN_VERSION
 mv /usr/share/webapps/phpmyadmin/config.sample.inc.php /usr/share/webapps/phpmyadmin/config.inc.php
 mkdir /usr/share/webapps/tmp
-echo "\$i = 1;" >/usr/share/webapps/phpmyadmin/config.inc.php
+echo "<?php" >/usr/share/webapps/phpmyadmin/config.inc.php
+echo "// Simple phpMyAdmin configuration" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "// Uses http authentication; Link to container where DB is runing exemple mariadb" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$i = 1;" >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['Servers'][\$i]['auth_type'] = 'http'; " >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['Servers'][\$i]['host'] = 'mariadb';" >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['Servers'][\$i]['connect_type'] = 'tcp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
@@ -29,6 +32,7 @@ echo "\$cfg['Servers'][\$i]['AllowNoPassword'] = false;" >>/usr/share/webapps/ph
 echo "\$cfg['Servers'][\$i]['AllowRoot'] = true;" >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['UploadDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
 echo "\$cfg['SaveDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "?>" >>/usr/share/webapps/phpmyadmin/config.inc.php
 find /usr/share/ -type d -exec chmod 755 {} \;
 find /usr/share/webapps/phpmyadmin -type f -exec chmod 644 {} \;
 fi
