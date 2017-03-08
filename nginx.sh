@@ -7,7 +7,6 @@ PHPMYADMIN_VERSION=4.6.6
 nginx
 
 #install phpmyadmin
-wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz
 tar zxvf phpmyadmin.tar.gz
 mkdir /usr/share/webapps
 mv /phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /phpmyadmin

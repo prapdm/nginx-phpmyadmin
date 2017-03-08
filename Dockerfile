@@ -6,10 +6,11 @@ RUN \
 apk update && apk upgrade && apk --no-cache add inotify-tools  &&  apk --update add --no-cache  --virtual .build-dependencies wget
 
 ENV MYSQL_ROOT_PASSWORD=my-secret-pw22
-
+ENV PHPMYADMIN_VERSION=4.6.6
 
 
 RUN \
+wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz  && \
 echo "Delete Build pkgs" && \
 apk del .build-dependencies && \
 rm -rf /var/cache/apk/* && \
