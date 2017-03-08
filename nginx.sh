@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NGINX_CONFIG="/etc/nginx/conf.d/"
-DIRECTORY="/usr/share/webapps/phpmyadmin"
+DIRECTORY="/usr/share/webapps/phpmyadmin/"
 
 #start nginx
 nginx
@@ -14,8 +14,6 @@ tar zxvf phpmyadmin.tar.gz
 mv /phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /phpmyadmin
 mv /phpmyadmin /usr/share/webapps
 rm phpmyadmin.tar.gz -r
-addgroup -g 82 -S www-data
-adduser -u 82 -S -D -G www-data  -s /sbin/nologin www-data
 chown -R www-data:www-data /usr/share/webapps/phpmyadmin/
 rm -rf /usr/share/webapps/phpmyadmin/js/jquery/src/ /usr/share/webapps/phpmyadmin/js/openlayers/src/ /usr/share/webapps/phpmyadmin/setup/ /usr/share/webapps/phpmyadmin/examples/ /usr/share/webapps/phpmyadmin/test/
 rm -rf /usr/share/webapps/phpmyadmin/po/ /usr/share/webapps/phpmyadmin/templates/test/ /usr/share/webapps/phpmyadmin/phpunit.xml.* /usr/share/webapps/phpmyadmin/build.xml

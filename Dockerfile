@@ -11,6 +11,8 @@ ENV MYSQL_ROOT_PASSWORD=my-secret-pw22
 RUN \
 #Install phpmyadmin
 wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz && \
+addgroup -g 82 -S www-data && \
+adduser -u 82 -S -D -G www-data  -s /sbin/nologin www-data && \
 echo "Delete Build pkgs" && \
 apk del .build-dependencies && \
 rm -rf /var/cache/apk/* && \
