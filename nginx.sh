@@ -22,9 +22,11 @@ rm -rf /usr/share/webapps/phpmyadmin/po/ /usr/share/webapps/phpmyadmin/templates
 rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin/RELEASE-DATE-$PHPMYADMIN_VERSION
 mv /usr/share/webapps/phpmyadmin/config.sample.inc.php /usr/share/webapps/phpmyadmin/config.inc.php
 sed -i "s/$cfg['Servers'][$i]['host'] = 'localhost';/$cfg['Servers'][$i]['host'] = 'mariadb';/" /usr/share/webapps/phpmyadmin/config.inc.php
-sed -i "s/$cfg['blowfish_secret'] = '';/$cfg['blowfish_secret'] = 'sdffds9832492387kjhsdf';/" /usr/share/webapps/phpmyadmin/config.inc.php
-echo "$cfg['Servers'][$i]['user'] = 'root';" >> /usr/share/webapps/phpmyadmin/config.inc.php
-echo "$cfg['Servers'][$i]['password'] = getenv(\"MYSQL_ROOT_PASSWORD\");" >>/usr/share/webapps/phpmyadmin/config.inc.php
+sed -i "s/$cfg['blowfish_secret'] = ''; \/* YOU MUST FILL IN THIS FOR COOKIE AUTH! *\//$cfg['blowfish_secret'] = 'sdffds9832492387kjhsdf';/" /usr/share/webapps/phpmyadmin/config.inc.php
+echo "$cfg['Servers'][\$i]['user'] = 'root';" >> /usr/share/webapps/phpmyadmin/config.inc.php
+echo "$cfg['Servers'][\$i]['password'] = getenv(\"MYSQL_ROOT_PASSWORD\");" >>/usr/share/webapps/phpmyadmin/config.inc.php
+chmod +xr /usr/share/webapps/ 
+chmod +xr /usr/share/webapps/phpmyadmin/
 find /usr/share/webapps/ -type d -exec chmod 750 {} \;
 find /usr/share/webapps/ -type f -exec chmod 640 {} \;
 chmod 644 /usr/share/webapps/phpmyadmin/config.inc.php
