@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NGINX_CONFIG="/etc/nginx/conf.d/"
-DIRECTORY="/usr/share/webapps"
+DIRECTORY="/usr/share/webapps/phpmyadmin"
 
 #start nginx
 nginx
