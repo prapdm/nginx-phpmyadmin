@@ -19,15 +19,22 @@ rm -rf /usr/share/webapps/phpmyadmin/js/jquery/src/ /usr/share/webapps/phpmyadmi
 rm -rf /usr/share/webapps/phpmyadmin/po/ /usr/share/webapps/phpmyadmin/templates/test/ /usr/share/webapps/phpmyadmin/phpunit.xml.* /usr/share/webapps/phpmyadmin/build.xml
 rm -rf /usr/share/webapps/phpmyadmin/composer.json /usr/share/webapps/phpmyadmin/RELEASE-DATE-$PHPMYADMIN_VERSION
 mv /usr/share/webapps/phpmyadmin/config.sample.inc.php /usr/share/webapps/phpmyadmin/config.inc.php
-sed -i "s/$cfg['Servers'][$i]['host'] = 'localhost';/$cfg['Servers'][$i]['host'] = 'mariadb';/" /usr/share/webapps/phpmyadmin/config.inc.php
-sed -i "s/$cfg['blowfish_secret'] = '';/$cfg['blowfish_secret'] = 'sdffds9832492387kjhsdf';/" /usr/share/webapps/phpmyadmin/config.inc.php
-echo "$cfg['Servers'][\$i]['user'] = 'root';" >> /usr/share/webapps/phpmyadmin/config.inc.php
-echo "$cfg['Servers'][\$i]['password'] = getenv(\"MYSQL_ROOT_PASSWORD\");" >>/usr/share/webapps/phpmyadmin/config.inc.php
+mkdir /usr/share/webapps/tmp
+echo "\$i = 1;" >/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['auth_type'] = 'http'; " >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['host'] = 'mariadb';" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['connect_type'] = 'tcp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['compress'] = false;" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['AllowNoPassword'] = false;" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['Servers'][\$i]['AllowRoot'] = true;" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['UploadDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
+echo "\$cfg['SaveDir'] = '/usr/share/webapps/tmp';" >>/usr/share/webapps/phpmyadmin/config.inc.php
 find /usr/share/ -type d -exec chmod 755 {} \;
 find /usr/share/webapps/ -type f -exec chmod 640 {} \;
 chmod 644 /usr/share/webapps/phpmyadmin/config.inc.php
 fi
 
+#reload nginx when config changed
 while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG; do
   nginx -t
   if [ $? -eq 0 ]
