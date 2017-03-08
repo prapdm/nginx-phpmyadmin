@@ -8,6 +8,8 @@ apk update && apk upgrade && apk --no-cache add inotify-tools  &&  apk --update 
 ENV PHPMYADMIN_VERSION=4.6.6
 ENV MYSQL_ROOT_PASSWORD=my-secret-pw22
 
+VOLUME ["/usr/share/"]
+
 RUN \
 #Install phpmyadmin
 wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz -O phpmyadmin.tar.gz && \
@@ -39,6 +41,6 @@ COPY nginx.sh /root/nginx.sh
 RUN chmod +x /root/nginx.sh 
 
 
-VOLUME ["/usr/share/webapps/"]
+
 
 CMD ["/root/nginx.sh"]
